@@ -1,7 +1,10 @@
+// Allocate and initialize global variabls.
 var index = 0;
 var qLine = "";
-var numArray = [];
+var printedQuotes = [];
 var buttonText = "";
+
+// Array of objects to hold all the quotes.
 var quotes = [
 	{
 		quote: "Life is really simple, but we insist on making it complicated.",
@@ -55,17 +58,21 @@ var quotes = [
 	}
 ];
 
+/* Generate and return a random number between 0 to n-1, 
+ * n being the number of values in the array.
+ */
 function getRandomQuote() {
 	do {
 		index = Math.floor(Math.random() * quotes.length);
-		j = numArray.indexOf(index);
+		j = printedQuotes.indexOf(index);
 	} while (j != -1);
 
 	return quotes[index];
 } 
 
+// Print the quite to the output ie. the web page.
 function printQuote() {
-	if (numArray.length < quotes.length) {
+	if (printedQuotes.length < quotes.length) {
 		buttonText = document.getElementById("loadQuote").innerHTML;
 		if (buttonText == "Reset") {
 			document.getElementById("loadQuote").innerHTML = "Show another quote";
@@ -79,8 +86,8 @@ function printQuote() {
 		document.body.style.backgroundColor = quote.color;
 		document.getElementById("loadQuote").style.background = quote.color;
 
-		numArray.push(index);
-	} else if(numArray.length == quotes.length){
+		printedQuotes.push(index);
+	} else if(printedQuotes.length == quotes.length){
 		document.getElementById("quote").innerHTML = "We are out of quotes.";
 		document.getElementById("source").innerHTML = "Vineet Tiwari";
 
@@ -89,11 +96,12 @@ function printQuote() {
 
 		document.getElementById("loadQuote").innerHTML= "Reset";
 
-		numArray = [];
+		printedQuotes = [];
 	}
 }
 
-function autoChangeQuote() {
+// Change the quote based on the availability of printable quotes.
+function changeQuote() {
 	var buttonText = document.getElementById("loadQuote").innerHTML;
 	 if (buttonText === "Show another quote") {
 		 printQuote();
@@ -102,7 +110,8 @@ function autoChangeQuote() {
 	}
 }
 
-setInterval(autoChangeQuote, 3500);
+// Run the changeQuote() function every 3.5 seconds.
+setInterval(changeQuote, 3500);
 
 // event listener to respond to clicks on the page
 // when user clicks anywhere on the page, the "makeQuote" function is called
