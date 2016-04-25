@@ -1,8 +1,17 @@
 // Allocate and initialize global variabls.
 var index = 0;
-var qLine = "";
+var atIndex = 0;
 var printedQuotes = [];
 var buttonText = "";
+
+/* The contents of this object will be presented 
+ * once all the quotes have been viewed.
+ */
+endingQuote = {
+	quote: "We are out of quotes. Hit the 'Restart' button to go through the quotes again.",
+	source: "Vineet Tiwari",
+	color: "#36b55c"
+};
 
 // Array of objects to hold all the quotes.
 var quotes = [
@@ -64,38 +73,34 @@ var quotes = [
 function getRandomQuote() {
 	do {
 		index = Math.floor(Math.random() * quotes.length);
-		j = printedQuotes.indexOf(index);
-	} while (j != -1);
+		atIndex = printedQuotes.indexOf(index);
+	} while (atIndex != -1);
 
 	return quotes[index];
 } 
 
-// Print the quite to the output ie. the web page.
+// Update the html elements appropriately with the contents of the quote object.
+function upDateHTML(quote) {
+	document.getElementById("quote").innerHTML = quote.quote;
+	document.getElementById("source").innerHTML = quote.source;
+
+	document.body.style.backgroundColor = quote.color;
+	document.getElementById("loadQuote").style.background = quote.color;
+}
+
+// Print the quite to the output stream ie. the web page.
 function printQuote() {
 	if (printedQuotes.length < quotes.length) {
 		buttonText = document.getElementById("loadQuote").innerHTML;
-		if (buttonText == "Reset") {
+		if (buttonText == "Restart") {
 			document.getElementById("loadQuote").innerHTML = "Show another quote";
 		}
-
 		var quote = getRandomQuote();
-
-		document.getElementById("quote").innerHTML = quote.quote;
-		document.getElementById("source").innerHTML = quote.source;
-
-		document.body.style.backgroundColor = quote.color;
-		document.getElementById("loadQuote").style.background = quote.color;
-
+		upDateHTML(quote)
 		printedQuotes.push(index);
 	} else if(printedQuotes.length == quotes.length){
-		document.getElementById("quote").innerHTML = "We are out of quotes.";
-		document.getElementById("source").innerHTML = "Vineet Tiwari";
-
-		document.body.style.backgroundColor = "#36b55c";
-		document.getElementById("loadQuote").style.background = "#36b55c";
-
-		document.getElementById("loadQuote").innerHTML= "Reset";
-
+		upDateHTML(endingQuote)
+		document.getElementById("loadQuote").innerHTML= "Restart";
 		printedQuotes = [];
 	}
 }
@@ -105,12 +110,14 @@ function changeQuote() {
 	var buttonText = document.getElementById("loadQuote").innerHTML;
 	 if (buttonText === "Show another quote") {
 		 printQuote();
-	} else if (buttonText === "Reset") {
+	} else if (buttonText === "Restart") {
 		return;
 	}
 }
 
-// Run the changeQuote() function every 3.5 seconds.
+/* Run the changeQuote() function every 3.5 seconds 
+ * for self-updating the web page with a different quote.
+ */
 setInterval(changeQuote, 3500);
 
 // event listener to respond to clicks on the page
