@@ -10,6 +10,8 @@ var buttonText = "";
 endingQuote = {
 	quote: "We are out of quotes. Hit the 'Restart' button to go through the quotes again.",
 	source: "Vineet Tiwari",
+	citation: "Unknown",
+	year: "Unknown",
 	color: "#36b55c"
 };
 
@@ -18,51 +20,71 @@ var quotes = [
 	{
 		quote: "Life is really simple, but we insist on making it complicated.",
 		source: "Confucius",
+		citation: "Unknown",
+		year: "Unknown",
 		color: "#05668D"
 	},
 	{
 		quote: "Success is simple. Do what's right, the right way, at the right time.",
 		source: "Arnold H. Glasow",
+		citation: "Unknown",
+		year: "Unknown",
 		color: "#00A896"
 	},
 	{
 		quote: "Conversation would be vastly improved by the constant use of four simple words: I do not know.",
 		source: "Andre Maurois",
+		citation: "Unknown",
+		year: "Unknown",
 		color: "#FF1654"
 	},
 	{
 		quote: "Things are not quite so simple always as black and white.",
 		source: "Doris Lessing",
+		citation: "Unknown",
+		year: "Unknown",
 		color: "#9C89B8"
 	},
 	{
 		quote: "The most simple things can bring the most happiness.",
 		source: "Izabella Scorupco",
+		citation: "Unknown",
+		year: "Unknown",
 		color: "#E83F6F"
 	},
 	{
 		quote: "It is always the simple that produces the marvelous.",
 		source: "Amelia Barr",
+		citation: "Unknown",
+		year: "Unknown",
 		color: "#8EA604"
 	},
 	{
 		quote: "Good, better, best. Never let it rest. 'Til your good is better and your better is best.",
 		source: "St. Jerome",
+		citation: "Unknown",
+		year: "Unknown",
 		color: "#00A6ED"
 	},
 	{
 		quote: "You can't cross the sea merely by standing and staring at the water.",
 		source: "Rabindranath Tagore",
+		citation: "Unknown",
+		year: "Unknown",
 		color: "#E8AA14"
 	},
 	{
 		quote: "Accept the challenges so that you can feel the exhilaration of victory.",
 		source: "George S. Patton",
+		citation: "Unknown",
+		year: "Unknown",
 		color: "#9CAFB7"
 	},
 	{
 		quote: "Life is 10% what happens to you and 90% how you react to it.",
 		source: "Charles R. Swindoll",
+		citation: "Unknown",
+		year: "Unknown",
 		color: "#4281A4"
 	}
 ];
@@ -83,6 +105,9 @@ function getRandomQuote() {
 function upDateHTML(quote) {
 	document.getElementById("quote").innerHTML = quote.quote;
 	document.getElementById("source").innerHTML = quote.source;
+	
+	document.getElementById("citation").innerHTML = quote.citation;
+	document.getElementById("year").innerHTML = quote.year;
 
 	document.body.style.backgroundColor = quote.color;
 	document.getElementById("loadQuote").style.background = quote.color;
